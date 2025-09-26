@@ -1,30 +1,34 @@
-# DataRule Project
+# DataRule
 
-## Overview
-DataRule is a community-driven project aimed at enhancing public transportation safety through citizen science. By empowering users to report incidents and share data, we aim to create safer and more efficient transit routes.
+DataRule es una plataforma de ciencia ciudadana enfocada en la seguridad del transporte público. Permite a los usuarios reportar incidentes, analizar datos y generar mapas de riesgo para mejorar la seguridad y la toma de decisiones en la movilidad urbana.
 
-## Features
-- **Citizen Science**: Users can report incidents and safe points in real-time.
-- **Risk Mapping**: Analyzes collected data to generate detailed risk maps.
-- **Impact Reporting**: Provides actionable insights to authorities for improving safety measures.
+## Estructura del Proyecto
 
-## Installation
-1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/datarule.git
-   ```
-2. Navigate to the project directory:
-   ```
-   cd datarule
-   ```
-3. Open `index.html` in your web browser to view the project.
+```
+datarule/
+├── DataRule.html         # Landing page moderna con Tailwind CSS
+├── index.html            # Versión simple de la landing page
+├── src/
+│   ├── scripts/
+│   │   └── main.js       # Lógica JS (actualmente vacío)
+│   └── styles/
+│       └── main.css      # Estilos personalizados (puede estar vacío)
+```
 
-## Usage
-- Users can interact with the application through the web interface.
-- Reports can be submitted via the mobile app (coming soon).
+## Características principales
+- Landing page responsiva y moderna (DataRule.html)
+- Navegación y secciones: Misión, Cómo Funciona, Participa
+- Uso de Tailwind CSS para estilos rápidos y personalizables
+- Preparado para integración de app móvil y datos abiertos
 
-## Contributing
-Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
+## Cómo usar
+1. Abre `DataRule.html` en tu navegador para ver la landing principal.
+2. El archivo `index.html` es una versión simplificada.
+3. Puedes personalizar los estilos en `src/styles/main.css` y agregar lógica en `src/scripts/main.js`.
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+## Créditos
+- Diseño y desarrollo: Equipo DataRule
+- Icons y fuentes: Google Fonts, Tailwind CSS
+
+---
+© 2024 DataRule. Todos los derechos reservados.
