@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataRule | Transporte Público Seguro y Ciencia Ciudadana</title>
+    <!-- Carga de Tailwind CSS para estilos modernos y responsivos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración personalizada de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'datarule-primary': '#1A237E', // Azul oscuro similar al logo
+                        'datarule-secondary': '#00BFFF', // Azul brillante/cian del logo
+                        'datarule-accent': '#FF8C00', // Naranja/ámbar del logo
+                        'datarule-light': '#F5F5F5',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'gradient-pulse': 'gradient-pulse 3s ease infinite',
+                    },
+                    keyframes: {
+                        'gradient-pulse': {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fuente Inter de Google Fonts (opcional, pero se recomienda) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos generales para el fondo y la sección Hero */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F5; /* Color de fondo claro */
+        }
+        /* Estilo para el fondo del Hero usando el gradiente del logo */
+        .hero-bg {
+            background-image: linear-gradient(135deg, #1A237E 0%, #00BFFF 100%);
+            background-size: 200% 200%;
+            animation: gradient-pulse 10s ease infinite;
+        }
+        /* Estilo para la "traza" digital, simulando el camino del logo */
+        .digital-trail {
+            background: linear-gradient(to right, rgba(0, 191, 255, 0), rgba(0, 191, 255, 0.5), #00BFFF);
+        }
+    </style>
+</head>
+<body class="text-datarule-primary">
+
+    <!-- Icono SVG del Logo (Escudo con Ruta) para usar en el Header -->
+    <svg id="logo-icon" class="hidden" width="32" height="32" viewBox="0 0 100 100">
+        <defs>
+            <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#1A237E;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#00BFFF;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+        <!-- Escudo principal (dark blue) -->
+        <path d="M50 0 L10 15 L10 55 C10 80 50 100 50 100 S90 80 90 55 L90 15 Z" fill="url(#blueGradient)"/>
+        <!-- Elementos de la ruta (light blue/cyan) -->
+        <path d="M25 60 L75 40 L50 20 Z" fill="none" stroke="#00BFFF" stroke-width="4" stroke-linecap="round"/>
+        <!-- Flecha (accent orange) -->
+        <path d="M55 40 L70 30 L60 40 L70 50 Z" fill="#FF8C00"/>
+        <!-- Puntos de datos (accent orange) -->
+        <circle cx="30" cy="55" r="3" fill="#FF8C00"/>
+        <circle cx="65" cy="45" r="3" fill="#FF8C00"/>
+        <circle cx="70" cy="30" r="3" fill="#FF8C00"/>
+    </svg>
+
+    <!-- 1. Header (Navegación) -->
+    <header class="sticky top-0 z-50 bg-white shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo y Nombre -->
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 flex items-center justify-center" id="logo-container">
+                    <!-- El SVG se inyectará aquí con JS -->
+                </div>
+                <span class="text-2xl font-black tracking-tighter">
+                    <span class="text-datarule-primary">Data</span><span class="text-datarule-secondary">Rule</span>
+                </span>
+            </div>
+            
+            <!-- Botón de Menú para Móviles -->
+            <button id="menu-button" class="md:hidden p-2 rounded-lg text-datarule-primary hover:bg-datarule-light transition duration-150">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+
+            <!-- Menú de Navegación (Desktop) -->
+            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#mision" class="hover:text-datarule-secondary transition duration-150">Nuestra Misión</a>
+                <a href="#caracteristicas" class="hover:text-datarule-secondary transition duration-150">Cómo Funciona</a>
+                <a href="#participa" class="hover:text-datarule-secondary transition duration-150">Participa</a>
+                <button class="bg-datarule-accent text-white px-4 py-2 rounded-full shadow-md hover:bg-opacity-90 transform hover:scale-105 transition duration-300">
+                    Iniciar Sesión
+                </button>
+            </nav>
+        </div>
+        
+        <!-- Menú de Navegación (Móvil - Oculto por defecto) -->
+        <nav id="mobile-menu" class="hidden md:hidden bg-white shadow-inner p-4 text-center border-t border-datarule-light">
+            <a href="#mision" class="block py-2 text-datarule-primary hover:bg-datarule-light rounded-md">Nuestra Misión</a>
+            <a href="#caracteristicas" class="block py-2 text-datarule-primary hover:bg-datarule-light rounded-md">Cómo Funciona</a>
+            <a href="#participa" class="block py-2 text-datarule-primary hover:bg-datarule-light rounded-md">Participa</a>
+            <button class="w-full mt-4 bg-datarule-accent text-white px-4 py-2 rounded-full shadow-md hover:bg-opacity-90 transition duration-300">
+                Iniciar Sesión
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 2. Sección Hero -->
+        <section class="hero-bg text-white py-20 md:py-32 overflow-hidden relative">
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="max-w-4xl">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
+                        Transformando el <span class="text-datarule-accent">Transporte Público</span> con Datos y Seguridad.
+                    </h1>
+                    <p class="text-xl sm:text-2xl font-light mb-8 opacity-90">
+                        Un proyecto de **Ciencia Ciudadana** que pone el poder de la información en tus manos para crear rutas más seguras y eficientes.
+                    </p>
+                    <a href="#participa" class="inline-block bg-datarule-accent text-datarule-primary font-bold px-8 py-3 rounded-full shadow-2xl transition duration-300 transform hover:scale-105 hover:bg-white/90">
+                    
+                        ¡Únete a la Regla del Dato!
+                    </a>
+                </div>
+            </div>
+            <!-- Elemento decorativo flotante que simula datos/ruta -->
+            <div class="hidden md:block absolute right-0 top-1/2 transform -translate-y-1/2 w-96 h-96 opacity-30">
+                <div class="w-full h-full rounded-full bg-datarule-secondary absolute blur-3xl animate-pulse"></div>
+            </div>
+        </section>
+
+        <!-- 3. Sección de Misión -->
+        <section id="mision" class="py-16 md:py-24">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-12">
+                    Nuestra Misión: <span class="text-datarule-secondary">Seguridad impulsada por la Comunidad</span>
+                </h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Tarjeta 1: Ciencia Ciudadana -->
+                    <div class="p-6 bg-white rounded-xl shadow-xl hover:shadow-2xl transition duration-300 border-t-4 border-datarule-secondary">
+                        <div class="text-datarule-secondary mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-3h-5v3zm-3-4h5v-3h-5v3zm-3-4h5v-3h-5v3zm-3-4h5V5h-5v3zM5 12h5V9H5v3zm0 4h5v-3H5v3zM5 8h5V5H5v3z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Ciencia Ciudadana</h3>
+                        <p class="text-gray-600">
+                            Empoderamos a los usuarios del transporte para que sean los ojos de la seguridad. Cada viaje es una oportunidad para recopilar datos valiosos sobre riesgos y calidad del servicio.
+                        </p>
+                    </div>
+                    <!-- Tarjeta 2: Rutas Seguras -->
+                    <div class="p-6 bg-white rounded-xl shadow-xl hover:shadow-2xl transition duration-300 border-t-4 border-datarule-accent">
+                        <div class="text-datarule-accent mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Mapeo de Riesgos</h3>
+                        <p class="text-gray-600">
+                            Analizamos los datos recolectados para generar mapas de riesgo detallados y en tiempo real, identificando paradas y tramos críticos que necesitan atención urgente.
+                        </p>
+                    </div>
+                    <!-- Tarjeta 3: Impacto Real -->
+                    <div class="p-6 bg-white rounded-xl shadow-xl hover:shadow-2xl transition duration-300 border-t-4 border-datarule-primary">
+                        <div class="text-datarule-primary mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Diálogo con Autoridades</h3>
+                        <p class="text-gray-600">
+                            La información verificada se entrega a las autoridades y empresas de transporte, sirviendo como base para tomar decisiones informadas y mejorar las políticas de seguridad.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Sección Cómo Funciona -->
+        <section id="caracteristicas" class="py-16 md:py-24 bg-datarule-light">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-16">
+                    El Ciclo de DataRule: Del Dato a la <span class="text-datarule-accent">Acción</span>
+                </h2>
+                <div class="relative max-w-5xl mx-auto">
+                    <!-- Línea de tiempo / Conector visual -->
+                    <div class="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-datarule-secondary/50 transform -translate-y-1/2"></div>
+                    
+                    <div class="grid md:grid-cols-3 gap-12">
+                        <!-- Paso 1: Recolección -->
+                        <div class="text-center relative">
+                            <div class="w-12 h-12 bg-datarule-secondary text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 shadow-xl border-4 border-white transform hover:scale-110 transition duration-300">1</div>
+                            <h3 class="text-2xl font-bold mb-2">Recolección (Tú)</h3>
+                            <p class="text-gray-700">Reportas incidentes, problemas o puntos seguros en tiempo real a través de nuestra app móvil.</p>
+                        </div>
+                        <!-- Paso 2: Análisis -->
+                        <div class="text-center relative mt-8 md:mt-0">
+                            <div class="w-12 h-12 bg-datarule-primary text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 shadow-xl border-4 border-white transform hover:scale-110 transition duration-300">2</div>
+                            <h3 class="text-2xl font-bold mb-2">Análisis (El Sistema)</h3>
+                            <p class="text-gray-700">Los datos son validados, anonimizados y procesados para generar una visión clara de la seguridad.</p>
+                        </div>
+                        <!-- Paso 3: Impacto -->
+                        <div class="text-center relative mt-8 md:mt-0">
+                            <div class="w-12 h-12 bg-datarule-accent text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4 shadow-xl border-4 border-white transform hover:scale-110 transition duration-300">3</div>
+                            <h3 class="text-2xl font-bold mb-2">Impacto (La Solución)</h3>
+                            <p class="text-gray-700">Generamos reportes y alertas que impulsan a las entidades públicas a actuar y mejorar el servicio.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 5. Llamada a la Acción (CTA) -->
+        <section id="participa" class="py-20 md:py-32 bg-datarule-primary">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6">
+                    Tu Dato. Tu Ruta. Tu Seguridad.
+                </h2>
+                <p class="text-xl text-datarule-light mb-10 max-w-3xl mx-auto">
+                    Únete a la comunidad DataRule. Descarga la aplicación y comienza a reportar hoy para hacer de tu ciudad un lugar más seguro.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <button class="bg-datarule-accent text-datarule-primary font-bold px-10 py-4 rounded-xl shadow-2xl transition duration-300 transform hover:scale-105 hover:bg-opacity-90">
+                        Descargar la App (¡Pronto!)
+                    </button>
+                    <a href="#" class="border border-white text-white font-bold px-10 py-4 rounded-xl shadow-2xl transition duration-300 transform hover:scale-105 hover:bg-white/10">
+                        Ver Datos Abiertos
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 6. Footer -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div>
+                <h4 class="font-bold mb-3 text-datarule-secondary">DataRule</h4>
+                <p class="text-sm text-gray-400">Ciencia Ciudadana para el Transporte.</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-3">Enlaces Rápidos</h4>
+                <ul class="text-sm space-y-2">
+                    <li><a href="#mision" class="hover:text-datarule-secondary">Misión</a></li>
+                    <li><a href="#caracteristicas" class="hover:text-datarule-secondary">Funcionamiento</a></li>
+                    <li><a href="#participa" class="hover:text-datarule-secondary">Participa</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-3">Legal</h4>
+                <ul class="text-sm space-y-2">
+                    <li><a href="#" class="hover:text-datarule-secondary">Términos de Servicio</a></li>
+                    <li><a href="#" class="hover:text-datarule-secondary">Política de Privacidad</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-3">Contacto</h4>
+                <p class="text-sm text-gray-400">info@datarule.org</p>
+                <div class="flex space-x-4 mt-3">
+                    <!-- Iconos de Redes Sociales (usando Emojis o SVG simples) -->
+                    <span class="text-xl hover:text-datarule-secondary cursor-pointer transition">🐦</span>
+                    <span class="text-xl hover:text-datarule-secondary cursor-pointer transition">🔗</span>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-8 pt-4 border-t border-gray-700 text-sm text-gray-500">
+            &copy; 2024 DataRule. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script>
+        // Funcionalidad de JavaScript para el menú móvil y la inyección del logo SVG.
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const logoIcon = document.getElementById('logo-icon');
+            const logoContainer = document.getElementById('logo-container');
+
+            // 1. Inyectar el SVG del logo en el header para que se visualice
+            if (logoIcon && logoContainer) {
+                // Clonar el SVG e inyectarlo
+                const clonedLogo = logoIcon.cloneNode(true);
+                clonedLogo.classList.remove('hidden');
+                clonedLogo.removeAttribute('id');
+                logoContainer.appendChild(clonedLogo);
+            }
+
+
+            // 2. Toggle para el menú de navegación móvil
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // 3. Cerrar el menú móvil al hacer clic en un enlace (UX mejorada)
+            const mobileLinks = mobileMenu.querySelectorAll('a, button');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    // Esperar un poco para que el anclaje se complete antes de ocultar
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                    }, 300);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
